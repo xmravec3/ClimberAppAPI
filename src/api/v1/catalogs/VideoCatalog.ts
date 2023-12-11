@@ -9,8 +9,8 @@ export default class VideoCatalog extends Catalog implements IVideoCatalog {
     async getByIDVideoInfo(id: number): Promise<VideoInfo> {
         const sql = `
             select v.ID, v.title, v.video_name, v.climber_id, c.\`name\` as climber_name, v.\`date\`, v.attempt, v.\`url\`, v.\`start\`, v.\`end\`, v.\`time\`, v.frames, v.side
-            from video AS v
-            inner join climber AS c on v.climber_id = c.ID
+            from videos AS v
+            inner join climbers AS c on v.climber_id = c.ID
             WHERE v.ID = ?
             order by v.ID asc;
         `.replace(/\s+|\n/g, ' ')
@@ -21,8 +21,8 @@ export default class VideoCatalog extends Catalog implements IVideoCatalog {
     async getAllBasic(): Promise<VideoBasic[]> {
         const sql = `
             select video.ID, video.title, video.video_name, climber.\`name\` as climber_name, video.climber_id, video.\`date\`, video.attempt, video.\`time\`
-            from video
-            inner join climber on video.climber_id = climber.ID
+            from videos
+            inner join climbers on video.climber_id = climber.ID
             order by video.ID asc;
         `.replace(/\s+|\n/g, ' ')
 
@@ -32,7 +32,7 @@ export default class VideoCatalog extends Catalog implements IVideoCatalog {
     async getByID(id: number): Promise<Video> {
         const sql = `
             SELECT *
-            FROM video 
+            FROM videos 
             WHERE ID = ?;
         `.replace(/\s+|\n/g, ' ')
 
@@ -42,8 +42,8 @@ export default class VideoCatalog extends Catalog implements IVideoCatalog {
     async getAll(): Promise<Video[]> { // add option to return climber name
         const sql = `
             select v.ID, v.title, v.video_name, v.climber_id, c.\`name\` as climber_name, v.\`date\`, v.attempt, v.\`url\`, v.\`start\`, v.\`end\`, v.\`time\`, v.frames, v.side, v.skeletons, v.trans_matrixes
-            from video AS v
-            inner join climber AS c on v.climber_id = c.ID
+            from videos AS v
+            inner join climbers AS c on v.climber_id = c.ID
             order by v.ID asc;
         `.replace(/\s+|\n/g, ' ')
 
@@ -53,7 +53,7 @@ export default class VideoCatalog extends Catalog implements IVideoCatalog {
     async getAllDates(): Promise<string[]> {
         const sql = `
             select distinct \`date\`
-            from video;
+            from videos;
         `.replace(/\s+|\n/g, ' ')
 
         return this._toString(await Catalog.getConnector().query({ query: sql }));

@@ -30,16 +30,16 @@ try:
     )
 
     # get video for KNN with specific ID (knn_id)
-    sql_select_one_Query = "SELECT ID, angles FROM video where ID=%s"
+    sql_select_one_Query = "SELECT ID, angles FROM videos where ID=%s"
     cursor = connection.cursor()
     cursor.execute(sql_select_one_Query, (knn_id,))
     selected_video = cursor.fetchall()[0]
 
     # get all videos
-    #sql_select_other_Query = "select v.ID, v.title, v.video_name, v.climber_id, c.`name` as climber_name, v.`date`, v.attempt, v.`time`, v.angles from video AS v inner join climber AS c on v.climber_id = c.ID order by v.ID asc"
+    #sql_select_other_Query = "select v.ID, v.title, v.video_name, v.climber_id, c.`name` as climber_name, v.`date`, v.attempt, v.`time`, v.angles from videos AS v inner join climbers AS c on v.climber_id = c.ID order by v.ID asc"
     
     # get videos without specific ID (knn_id)
-    sql_select_other_Query = "select v.ID, v.title, v.video_name, v.climber_id, c.`name` as climber_name, v.`date`, v.attempt, v.`time`, v.angles from video AS v inner join climber AS c on v.climber_id = c.ID where v.ID != %s order by v.ID asc"
+    sql_select_other_Query = "select v.ID, v.title, v.video_name, v.climber_id, c.`name` as climber_name, v.`date`, v.attempt, v.`time`, v.angles from videos AS v inner join climbers AS c on v.climber_id = c.ID where v.ID != %s order by v.ID asc"
     cursor = connection.cursor()
     cursor.execute(sql_select_other_Query, (knn_id,))
     videos = cursor.fetchall()

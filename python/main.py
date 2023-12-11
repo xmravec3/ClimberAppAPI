@@ -34,13 +34,13 @@ if __name__ == "__main__":
             database="eso"
         )
 
-        sql_select_one_Query = "SELECT ID, skeletons, trans_matrixes FROM video where ID=%s"
+        sql_select_one_Query = "SELECT ID, skeletons, trans_matrixes FROM videos where ID=%s"
         cursor = connection.cursor()
         cursor.execute(sql_select_one_Query, (l_ID,))
         # get video for KNN
         l_raw_data = cursor.fetchall()[0]
 
-        sql_select_one_Query = "SELECT ID, skeletons, trans_matrixes FROM video where ID=%s"
+        sql_select_one_Query = "SELECT ID, skeletons, trans_matrixes FROM videos where ID=%s"
         cursor = connection.cursor()
         cursor.execute(sql_select_one_Query, (r_ID,))
         # get video for KNN

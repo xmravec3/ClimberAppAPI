@@ -7,7 +7,7 @@ export default class ClimberCatalog extends Catalog implements IClimberCatalog {
     async getByID(id: number): Promise<Climber> {
         const sql = `
             SELECT *
-            FROM climber 
+            FROM climbers 
             WHERE ID = ?;
         `.replace(/\s+|\n/g, ' ')
 
@@ -17,7 +17,7 @@ export default class ClimberCatalog extends Catalog implements IClimberCatalog {
     async getAll(): Promise<Climber[]> {
         const sql = `
             SELECT *
-            FROM climber 
+            FROM climbers 
             ORDER BY ID ASC;
         `.replace(/\s+|\n/g, ' ')
 
@@ -27,8 +27,8 @@ export default class ClimberCatalog extends Catalog implements IClimberCatalog {
     async getAllWithVideo(): Promise<Climber[]> {
         const sql = `
             select distinct v.climber_id as ID, c.\`name\` as name
-            from video AS v
-            inner join climber AS c on v.climber_id = c.ID;
+            from videos AS v
+            inner join climbers AS c on v.climber_id = c.ID;
         `.replace(/\s+|\n/g, ' ')
 
         return this._toClimbers(await Catalog.getConnector().query({ query: sql }));
