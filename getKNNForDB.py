@@ -61,10 +61,7 @@ try:
     json_result = json.dumps(result)
     print(json_result)
 
-#except mysql.connector.Error as e:
-    #print("Error reading data from MySQL table", e) throw an error, no print!
 finally:
     if connection.is_connected():
         connection.close()
         cursor.close()
-        #print("MySQL connection is closed")

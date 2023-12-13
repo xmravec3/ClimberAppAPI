@@ -525,22 +525,16 @@ def get_data(matches, shape=(800, 1000), video_load=True):
     graph = canvas.graph.copy()
 
     #  finds files
-    # un_file0, un_file1 = f"unpacked_data/{matches[0]}.data", f"unpacked_data/{matches[1]}.data" # BP SALANICOVA
-    un_file0 = f"C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/unpacked_data/{matches[0]}.data"
-    un_file1 = f"C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/unpacked_data/{matches[1]}.data"
+    un_file0, un_file1 = f"unpacked_data/{matches[0]}.data", f"unpacked_data/{matches[1]}.data"
     f_video0, f_video1 = f"videa/{matches[0]}.mp4", f"videa/{matches[1]}.mp4"
 
     # loads relative data and unroll the camera movement
-    rel_climbers = fw.load_data(un_file0, un_file1) # - it is loading skeletons into an array
-
-
-    # slow down movement and scaling - not for graph
+    rel_climbers = fw.load_data(un_file0, un_file1)
     un_climbers = ed.insert_frame(rel_climbers.copy())
     un_climbers = ed.scaling(un_climbers, video_right.shape)
 
-    # Relevant data for gpraph!!!!!!
-    clms = fw.load_matrices(matches, rel_climbers.copy())   # - it is loading matrixes and multiply them into virtual refference wall
-    clms_insert = ed.insert_frame(clms) # it is double the length
+    clms = fw.load_matrices(matches, rel_climbers.copy())
+    clms_insert = ed.insert_frame(clms)
     climbers = ed.fit_to_graph(clms_insert, graph.shape)
 
     if video_load:
@@ -574,8 +568,7 @@ def play_match(matches, shape, stop, trj):
 
     fw.write_graph(name, cp.delay_points(climbers_d), cp.compute_speed(climbers_d),
                    ed.aligning_by_height_indices(climbers_d), climbers_d)
-    #fw.write_trajectory("C:/Users/salan/Documents/SKOLA/SBAPR/out_data/koleracia.txt", climbers, trj) SALANICOVA BP
-    fw.write_trajectory("C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/out_data/koleracia.txt", climbers, trj)
+    fw.write_trajectory("C:/Users/salan/Documents/SKOLA/SBAPR/out_data/koleracia.txt", climbers, trj)
 
     indc_c = [[i for i in range(len(climbers[j]))] for j in range(2)]
     indc_v = indc_c

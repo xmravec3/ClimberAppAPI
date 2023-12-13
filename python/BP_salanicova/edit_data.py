@@ -69,22 +69,18 @@ def fit_to_graph(climbers, shape):
         climbers[c][:, :, 1] *= height * 0.9
 
         climbers[c][:, :, 0] += (width * 0.1) // 2
-        climbers[c][:, :, 0] += 50  # okraje pre legendu
+        climbers[c][:, :, 0] += 50
         climbers[c][:, :, 0] -= 25
         climbers[c][:, :, 1] += (height * 0.1) // 2
 
     # shift to x coordinates
     avrg_x = (np.max(climbers[0][:, :, 0]) - np.min(climbers[0][:, :, 0])) / 2
     start_x = climbers[0][0, 6, 0] - avrg_x - width / 3.5
-    #a = climbers[0][0, 6, 0] #PM debug
     # climbers[0][nth, pose, x or y coordinate]
     climbers[0][:, :, 0] -= start_x
-    #b = climbers[0][:, :, 0] #PM debug
 
     avrg_x1 = (np.max(climbers[1][:, :, 0]) - np.min(climbers[1][:, :, 0])) / 2
     start_x1 = climbers[1][0, 6, 0] - avrg_x1 - 3 * width / 4
-    #cc = climbers[1][:, :, 0] #PM debug
-    #d = np.min(climbers[1][:, :, 0]) #PM debug
     climbers[1][:, :, 0] -= start_x1
 
     return climbers

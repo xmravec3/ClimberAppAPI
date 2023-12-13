@@ -20,7 +20,7 @@ def load_video(filenames, target_dim=None):
     try:
         for video_file in filenames:
             video_climber = []
-            video_file = "C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/" + video_file  # added PM
+            video_file = "C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/" + video_file  # UPDATED Peter Mravec
             cap = cv2.VideoCapture(video_file)
             fps = cap.get(cv2.CAP_PROP_FPS)
             fpss.append(fps)
@@ -132,9 +132,7 @@ def write_graph(name, delay_points, speed, advantage, climbers):
     speed = list(map(lambda a, b: b - a, speed[0], speed[1]))
 
     clusters, _ , _= delay_points
-    #with open(f"out_data/{name}_delay_data.txt", "w") as out_file:
-    with open(f"C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/out_data/{name}_delay_data.txt", "w") as out_file:
-    #C:\GIT\diplom\SalanicovaBP\SBAPR\out_data\BP_8_2019-08-17_1;25_2019-08-17_1_delay_data.txt
+    with open(f"out_data/{name}_delay_data.txt", "w") as out_file:
         for i in range(len(clusters)):
             for joints in clusters[i]:
                 for point in joints:
@@ -142,7 +140,6 @@ def write_graph(name, delay_points, speed, advantage, climbers):
                     if count > 15:
                         d = f"{ids[i].split('_')[0]},{joint_description[joint]},{(first_f, last_f)},{np.round(coor[0], 2)},{np.round(coor[1], 2)},{count / 50}\n"
                         out_file.write(d)
-                    # print(d)
     out_file.close()
 
     h1 = int(min(np.min(climbers[0][:, :, 1]), np.min(climbers[1][:, :, 1])))
@@ -172,7 +169,7 @@ def create_video(images, name, rate):
 
     """
     #image_folder = 'images'
-    image_folder = 'C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/images'   # PM changes
+    image_folder = 'C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/images'   # Peter Mravec changed
     video_name = f'C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/outputs/{name}.avi'  # 'f'{images[0][:5]}.avi'
 
     frame = cv2.imread(os.path.join(image_folder, images[0]))
@@ -198,8 +195,7 @@ def write_images(images, name):
     names_imgs = []
     for i in range(len(images)):
         image = images[i]
-        #cv2.imwrite(f"images/{name}{i + 1}.jpg", image)
-        cv2.imwrite(f"C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/images/{name}{i + 1}.jpg", image)  #PM changes
+        cv2.imwrite(f"images/{name}{i + 1}.jpg", image)
         names_imgs.append(f"{name}{i + 1}.jpg")
     return names_imgs
 
@@ -213,10 +209,8 @@ def load_matrices(matches, climbers):
     """
 
     try:
-        #trans_matrices = [np.loadtxt(f'cut_out/{matches[0]}.mp4.txt.gz').reshape((-1, 3, 3)),
-        #                  np.loadtxt(f'cut_out/{matches[1]}.mp4.txt.gz').reshape((-1, 3, 3))]
-        trans_matrices = [np.loadtxt(f'C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/cut_out/{matches[0]}.mp4.txt.gz').reshape((-1, 3, 3)),
-                          np.loadtxt(f'C:/Users/I343585/Desktop/transformMatricies/editSalaniva_transform/SBAPR/cut_out/{matches[1]}.mp4.txt.gz').reshape((-1, 3, 3))]
+        trans_matrices = [np.loadtxt(f'cut_out/{matches[0]}.mp4.txt.gz').reshape((-1, 3, 3)),
+                          np.loadtxt(f'cut_out/{matches[1]}.mp4.txt.gz').reshape((-1, 3, 3))]
     except IOError as e:
         print(e)
         sys.exit(1)
@@ -237,7 +231,7 @@ def load_matrices_PM(trans_matrixes_read, climbers):
     :return:
     """
 
-    l_trans_matrix_file = io.StringIO(trans_matrixes_read[0]) # possible issue with last item \n
+    l_trans_matrix_file = io.StringIO(trans_matrixes_read[0])
     r_trans_matrix_file = io.StringIO(trans_matrixes_read[1])
     trans_matrices = [ np.loadtxt(l_trans_matrix_file).reshape((-1, 3, 3)), 
                       np.loadtxt(r_trans_matrix_file).reshape((-1, 3, 3)) ]
