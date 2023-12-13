@@ -60,9 +60,9 @@ if __name__ == "__main__":
     climbers_d = climbers
     clusters, _, _ = cp.delay_points(climbers_d)
 
-    joint_description = {0: 'lFoot', 1: 'lKnee', 2: 'lHip', 3: 'rHip', 4: 'rKnee', 5: 'rFoot', 6: 'root', 7: 'thorax',
-                         8: 'neck', 9: 'head', 10: 'lHand', 11: 'lElbow', 12: 'lShoulder', 13: 'rShoulder',
-                         14: 'rElbow', 15: 'rHand'}
+    joint_description = {0: 'rFoot', 1: 'rKnee', 2: 'rHip', 3: 'lHip', 4: 'lKnee', 5: 'lFoot', 6: 'root', 7: 'thorax',
+                         8: 'neck', 9: 'head', 10: 'rHand', 11: 'rElbow', 12: 'rShoulder', 13: 'lShoulder',
+                         14: 'lElbow', 15: 'lHand'}
     
     delay_points = []
 
