@@ -11,7 +11,6 @@ WORKDIR /usr/src/app
 # copy content
 COPY package*.json jest.config.ts tsconfig.json requirements.txt getKNNForDB.py ./
 COPY python ./python
-COPY pythonTest ./pythonTest
 COPY src ./src
 
 # install dependencies

@@ -11,7 +11,6 @@ WORKDIR /usr/src/app
 # copy content
 COPY package*.json jest.config.ts tsconfig.json requirements.txt getKNNForDB.py nodemon*.json ./
 COPY python ./python
-COPY pythonTest ./pythonTest
 
 RUN mkdir src
 RUN chmod 777 ./src
